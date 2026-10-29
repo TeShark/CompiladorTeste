@@ -18,8 +18,15 @@ public class CompiladorTeste {
 PARSER_END(CompiladorTeste)
 
 // Ignora espaços em branco
-SKIP: { " " " | "\t" | "\r" | "\n"}
+SKIP: { " " | "\t" | "\r" | "\n"}
 
 TOKEN: {
     < NUMERO: (["0"-"9"])+ >
+}
+
+// --- REGRAS SINTÁTICAS --- 
+double Start(): { Token t; }
+{
+    t = <NUMERO> <EOF>
+    { return Double.parseDouble(t.image); }
 }
